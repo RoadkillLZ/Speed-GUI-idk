@@ -23,9 +23,28 @@ tt.Font = Enum.Font.SourceSansBold
 tt.TextSize = 20
 tt.Parent = hh
 
-hh.Active = true
-hh.Draggable = true
+fr.Active = true
+fr.Draggable = true
 
-local but = Instance.new("TextButton")
-but.Size = UDim2.new(0.8, 0, 0, 30)
-but.Position = UDim2.new(0.1, 
+local button = Instance.new("TextButton")
+button.Size = UDim2.new(0.8, 0, 0, 30)
+button.Position = UDim2.new(0.1, 0, 0.5, -15)
+button.Text = "SPEED 500"
+button.BackgroundColor3 = Color3.FromRGB(67, 89, 56)
+button.TextColor3 = Color3.new(0, 0, 0)
+button.Font = Enum.Font.SourceSans
+button.TextSize = 18
+button.Parent = fr
+
+button.MouseButton1Click:connect(function()
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+if player.Character and player.Character:FindFirstChildOfClass("Humanoid") then
+    player.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = 500
+end
+
+player.CharacterAdded:Connect(function(char)
+    local hum = char:WaitForChild("Humanoid")
+    hum.WalkSpeed = 500
+end)
